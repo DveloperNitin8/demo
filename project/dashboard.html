@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SaaS Demo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        body {
+            background-color: var(--bg-color);
+        }
+        
+        .dashboard-container {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 80px); /* Account for footer */
+        }
+
+        .dashboard-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 32px;
+        }
+
+        .dashboard-card {
+            background: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .dashboard-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #60A5FA);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .user-details p {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .user-details span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            gap: 16px;
+        }
+
+        .action-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            border-radius: var(--border-radius);
+            background: #F8FAFC;
+            border: 1px dashed var(--primary);
+            transition: var(--transition);
+        }
+
+        .action-card:hover {
+            background: #EFF6FF;
+            transform: translateY(-2px);
+        }
+
+        .action-text h3 {
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+
+        .action-text p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar scanned" id="navbar" style="box-shadow: var(--shadow-sm); border-bottom-color: var(--border);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">SaaS<span>Demo</span></a>
+            
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="payment.html">Payments</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <span id="nav-user-name" style="margin-right: 16px; font-weight: 500;">Hi, User</span>
+                <button id="logout-btn" class="btn btn-secondary btn-nav">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container container">
+        <div class="dashboard-header">
+            <div>
+                <h1 id="welcome-text">Welcome back</h1>
+                <p>Manage your account and explore demo features.</p>
+            </div>
+            <a href="payment.html" class="btn btn-primary">Go to Payment</a>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Account Info -->
+            <div class="dashboard-card">
+                <h2>Account Info</h2>
+                <div class="user-info">
+                    <div class="avatar" id="user-avatar">?</div>
+                    <div class="user-details">
+                        <p id="user-fullname">Loading...</p>
+                        <span id="user-email">Loading...</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 32px;">
+                    <button id="logout-btn-card" class="btn btn-secondary btn-block">Sign Out</button>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="dashboard-card">
+                <h2>Quick Actions</h2>
+                <div class="quick-actions">
+                    <a href="payment.html" class="action-card">
+                        <div class="action-text">
+                            <h3>Demo Payment Gateway</h3>
+                            <p>Test our simulated frictionless checkout experience.</p>
+                        </div>
+                        <div class="btn btn-primary">Try Now</div>
+                    </a>
+                    
+                    <div class="action-card" style="border-color: var(--border); opacity: 0.7; cursor: not-allowed;">
+                        <div class="action-text">
+                            <h3>Analytics Dashboard</h3>
+                            <p>Coming soon in version 2.0</p>
+                        </div>
+                        <div class="btn btn-secondary" style="pointer-events: none;">Locked</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SaaS Demo Platform. Built with Vanilla Web Tech.</p>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dashboard specific auth logic
+            const currentUserStr = localStorage.getItem('currentUser');
+            if (currentUserStr) {
+                const user = JSON.parse(currentUserStr);
+                
+                // Set UI Elements
+                const firstName = user.name.split(' ')[0];
+                document.getElementById('welcome-text').textContent = `Welcome back, ${firstName}`;
+                document.getElementById('user-fullname').textContent = user.name;
+                document.getElementById('user-email').textContent = user.email;
+                
+                // Get initials for avatar
+                const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                document.getElementById('user-avatar').textContent = initials;
+                document.getElementById('nav-user-name').textContent = `Hi, ${firstName}`;
+            }
+
+            // Bind logout for the second button
+            const logoutBtnCard = document.getElementById('logout-btn-card');
+            if (logoutBtnCard) {
+                logoutBtnCard.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
